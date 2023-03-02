@@ -1,0 +1,43 @@
+
+<audio autoplay onchange="playAudio(pokemon.id)"></audio>
+
+<mat-card *ngIf="pokemon" style="width: 700px;">
+  <mat-card-content>
+    <mat-grid-list cols="5" rowHeight="200">
+      <mat-grid-tile>
+        <button mat-raised-button color="primary" routerLink="">
+        </button>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="2">
+        <div class="image_css">
+          <img mat-card-lg-image src="assets/img/official-artwork/{{pokemon.id}}.png"/>
+          <span>No. {{pokemon.id}}</span>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="2">
+        <mat-list>
+          <mat-list-item>
+            <span>{{ pokemon.name }}</span>
+            <button mat-icon-button matTooltip="Basic" (click)="playAudio(pokemon.id)">
+              <mat-icon>play_arrow</mat-icon>
+            </button>
+          </mat-list-item>
+          <mat-list-item>
+            <mat-chip-set>
+              <mat-chip *ngFor="let type of pokemon.types">
+                {{type}}
+              </mat-chip>
+            </mat-chip-set>
+          </mat-list-item>
+          <mat-list-item>
+            <span>Taille : {{ pokemon.height }} m</span>
+          </mat-list-item>
+          <mat-list-item>
+            <span>Poids  : {{ pokemon.weight }} kg</span>
+          </mat-list-item>
+        </mat-list>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="5">{{ pokemon.description }}</mat-grid-tile>
+    </mat-grid-list>
+  </mat-card-content>
+</mat-card>
