@@ -1,4 +1,13 @@
+<mat-form-field appearance="fill" class="recherche-pokemon">
+  <mat-label>Search</mat-label>
+  <input matInput type="text" placeholder="Enter your search query" />
+  <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="query" (click)="clearSearch()">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-form-field>
+
 <mat-nav-list infinite-scroll (scrolled)="onScroll()" [scrollWindow]="false" class="mat-nav-list-pokemon">
+
   <mat-list-item *ngFor="let pokemon of pokemons?.data" (click) ="selectPokemon(pokemon)" >
     <img matListItemAvatar
       src="assets/img/sprites/{{pokemon.id}}.png"

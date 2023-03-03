@@ -4,7 +4,7 @@
     <app-pokemon-list (selected)="selectItem($event)"></app-pokemon-list>
   </mat-sidenav>
 
-  <mat-sidenav-content fill>
+  <mat-sidenav-content fill class="detail-pokemon">
     <div *ngIf="selectedPokemonId; else noPokemonSelected">
       <app-pokemon-detail *ngIf="selectedPokemonId" [pokemonId]="selectedPokemonId"></app-pokemon-detail>
     </div>

@@ -42,5 +42,4 @@ export class PokemonDetailComponent implements OnChanges {
     audio.load();
     audio.play();
   }
-
 }
