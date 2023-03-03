@@ -1,0 +1,15 @@
+
+<mat-sidenav-container class="test" autosize="true">
+  <mat-sidenav mode="side" opened="true">
+    <app-pokemon-list (selected)="selectItem($event)"></app-pokemon-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content fill>
+    <div *ngIf="selectedPokemonId; else noPokemonSelected">
+      <app-pokemon-detail *ngIf="selectedPokemonId" [pokemonId]="selectedPokemonId"></app-pokemon-detail>
+    </div>
+    <ng-template #noPokemonSelected>
+      <p>Select a Pokemon from the list to see its details.</p>
+    </ng-template>
+  </mat-sidenav-content>
+</mat-sidenav-container>

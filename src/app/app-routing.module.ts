@@ -5,7 +5,10 @@ import { PokemonListComponent } from './pokemons/pokemon-list/pokemon-list.compo
 
 import { PokemonDetailComponent } from './pokemons/pokemon-detail/pokemon-detail.component';
 
+import { PokedexComponent } from './pokemons/pokedex/pokedex.component';
+
 const routes: Routes = [
+  { path: 'test', component: PokedexComponent },
   { path: '', component: PokemonListComponent },
   { path: 'pokemon/:id', component: PokemonDetailComponent },
 ];

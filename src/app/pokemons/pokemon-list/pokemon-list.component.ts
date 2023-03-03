@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 import { PagedData, Pokemon } from '../../pokemon';
 import { PokemonService } from '../../services/pokemon.service';
@@ -8,7 +8,11 @@ import { PokemonService } from '../../services/pokemon.service';
   templateUrl: './pokemon-list.component.html',
   styleUrls: ['./pokemon-list.component.scss']
 })
+
+
 export class PokemonListComponent implements OnInit{
+  @Output() selected = new EventEmitter<number>();
+
   pokemons!: PagedData<Pokemon>;
 
   constructor(private pokemonService: PokemonService) { }
@@ -30,11 +34,12 @@ export class PokemonListComponent implements OnInit{
           this.pokemons.data = this.pokemons.data.concat(pokemons.data);
         }
       }
-    }
+    });
+  }
 
-    );
-
-
+  selectPokemon(pokemon : Pokemon ): void {
+    this.selected.emit(pokemon.id);
+    console.log("slect")
   }
 
 }
