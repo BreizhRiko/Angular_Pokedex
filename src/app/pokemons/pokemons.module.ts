@@ -12,6 +12,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     MatIconModule,
     MatGridListModule,
     InfiniteScrollModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatInputModule,
+    FormsModule
   ]
 })
 export class PokemonsModule {

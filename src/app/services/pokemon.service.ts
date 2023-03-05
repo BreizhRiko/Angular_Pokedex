@@ -42,5 +42,4 @@ export class PokemonService {
     queryParams = queryParams.append("search",search);
     return this.http.get<PagedData<Pokemon>>(url,{params:queryParams});
   }
-
 }

@@ -8,8 +8,8 @@ import { PokemonDetailComponent } from './pokemons/pokemon-detail/pokemon-detail
 import { PokedexComponent } from './pokemons/pokedex/pokedex.component';
 
 const routes: Routes = [
-  { path: 'test', component: PokedexComponent },
-  { path: '', component: PokemonListComponent },
+  { path: '', component: PokedexComponent },
+  { path: 'list', component: PokemonListComponent },
   { path: 'pokemon/:id', component: PokemonDetailComponent },
 ];
 

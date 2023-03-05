@@ -42,4 +42,9 @@ export class PokemonDetailComponent implements OnChanges {
     audio.load();
     audio.play();
   }
+
+  formatNumber(num: number, width: number): string {
+    return num.toString().padStart(width, '0');
+  }
+
 }
