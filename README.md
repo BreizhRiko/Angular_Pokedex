@@ -1,5 +1,5 @@
 # Pokedex Eric LE MEUR / LE4 / Centrale Lille IG2I
-# https://bisonfoutu.github.io/ng-reveal/#/6/2
+# https://bisonfoutu.github.io/ng-reveal/#/
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.6.
 
