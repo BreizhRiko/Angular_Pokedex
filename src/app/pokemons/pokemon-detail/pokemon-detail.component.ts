@@ -1,4 +1,4 @@
-import { Pokemon } from './../../pokemon';
+import { Pokemon } from '../../model/pokemon';
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';

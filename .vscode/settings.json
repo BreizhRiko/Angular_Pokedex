@@ -1,0 +1,9 @@
+{
+  "files.exclude": {
+    "**/*.spec.ts": true,
+  },
+  "search.exclude": {
+    "**/*.spec.ts\": true": true
+  }
+
+}

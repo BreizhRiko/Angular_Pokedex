@@ -7,8 +7,4 @@ export interface Pokemon {
   weight?: number;
 }
 
-export interface PagedData<T> {
-  data: T[];
-  limit: number;
-  offset: number;
-}
+

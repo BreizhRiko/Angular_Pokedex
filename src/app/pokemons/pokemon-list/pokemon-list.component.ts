@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
-import { PagedData, Pokemon } from '../../pokemon';
+import { Pokemon } from '../../model/pokemon';
+import { PagedData } from "../../model/PagedData";
 import { PokemonService } from '../../services/pokemon.service';
 
 import { Observable, Subject } from 'rxjs';
@@ -22,29 +23,19 @@ export class PokemonListComponent implements OnInit{
   constructor(private pokemonService: PokemonService) { }
 
   ngOnInit(): void {
+
     this.getPokemons();
   }
 
   onScroll(): void{
-    this.pokemonService.getPokemonParamsPages(20, this.pokemons?.data.length).subscribe({
-      next: (pokemons) => {
-        if(this.pokemons){
-          this.pokemons.data = this.pokemons.data.concat(pokemons.data);
-        }
+    this.pokemonService.getPokemonParams(10, this.pokemons?.data.length, this.query).subscribe({
+    next: (pagedData) => {
+      if(this.pokemons) {
+        this.pokemons.data = this.pokemons.data.concat(pagedData.data);
       }
-    });
-  }
-
-  checkQuery(str: string): string {
-    if (!str) {
-      return 'empty';
-    } else if (/^[a-zA-Z]+$/.test(str)) {
-      return 'letters';
-    } else if (/^\d+$/.test(str)) {
-      return 'digits';
-    } else {
-      return 'default';
     }
+  });
+
   }
 
   selectPokemon(pokemon : Pokemon ): void {
@@ -67,39 +58,10 @@ export class PokemonListComponent implements OnInit{
   }
 
   getPokemons(): void {
-    switch (this.checkQuery(this.query)) {
-      case 'empty':
-        this.pokemonService.getPokemonParamsPages(20).subscribe(
-          pokemons => this.pokemons = pokemons
-        );
-        break;
-      case 'letters':
-        this.pokemonService.getPokemonParamsName(this.query).subscribe({
-          next: (pokemons) => {
-            this.pokemons = pokemons;
-            console.log(pokemons);
-          }});
-        break;
-      case 'digits':
-        this.pokemonService.getPokemonParamsPages(1,parseInt(this.query,10)-1).subscribe({
-          next: (pokemons) => {
-            this.pokemons = pokemons;
-            console.log(pokemons);
-          }});
-        console.log(parseInt(this.query,10));
-        break;
-      case 'default':
-        this.pokemonService.getPokemonParamsPages(20).subscribe(
-          pokemons => this.pokemons = pokemons
-        );
-        break;
-
-      default:
-        this.pokemonService.getPokemonParamsPages(20).subscribe(
-          pokemons => this.pokemons = pokemons
-        );
-        break;
-    }
-
+    this.pokemonService.getPokemonParams(20,0,this.query).subscribe({
+      next: (pagedData) => {
+        this.pokemons = pagedData;
+      }
+    });
   }
 }

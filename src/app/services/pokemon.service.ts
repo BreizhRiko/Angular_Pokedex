@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
-import { PagedData, Pokemon } from '../pokemon';
+import { Pokemon } from '../model/pokemon';
+import { PagedData } from "../model/PagedData";
 import { MessageService } from './message.service'
 
 const httpOptions = {
@@ -28,18 +29,13 @@ export class PokemonService {
     return this.http.get<Pokemon>(url);
   }
 
-  public getPokemonParamsPages(limit: number, offset?: number): Observable<PagedData<Pokemon>> {
+  public getPokemonParams(limit?: number, offset?: number, search?: string): Observable<PagedData<Pokemon>> {
     const url = 'http://pokedex-api.cleverapps.io/pokemons';
-    let queryParams = new HttpParams();
-    if(offset) {queryParams = queryParams.append("offset",offset);}
-    queryParams = queryParams.append("limit",limit);
-    return this.http.get<PagedData<Pokemon>>(url,{params:queryParams});
+    let params = new HttpParams();
+    if(offset) params = params.append('offset', offset);
+    if(limit) params = params.append('limit', limit);
+    if(search) params = params.append('search', search);
+    return this.http.get<PagedData<Pokemon>>(url , { params: params });
   }
 
-  public getPokemonParamsName(search: string): Observable<PagedData<Pokemon>> {
-    const url = 'http://pokedex-api.cleverapps.io/pokemons';
-    let queryParams = new HttpParams();
-    queryParams = queryParams.append("search",search);
-    return this.http.get<PagedData<Pokemon>>(url,{params:queryParams});
-  }
 }
