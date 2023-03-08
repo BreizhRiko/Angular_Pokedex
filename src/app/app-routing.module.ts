@@ -7,8 +7,12 @@ import { PokemonDetailComponent } from './pokemons/pokemon-detail/pokemon-detail
 
 import { PokedexComponent } from './pokemons/pokedex/pokedex.component';
 
+import { AuthComponent } from './auth/auth.component';
+
 const routes: Routes = [
-  { path: '', component: PokedexComponent },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'login', component: AuthComponent },
+  { path: 'pokedex', component: PokedexComponent },
   { path: 'list', component: PokemonListComponent },
   { path: 'pokemon/:id', component: PokemonDetailComponent },
 ];

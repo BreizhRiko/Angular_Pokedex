@@ -10,6 +10,10 @@ import { PokemonListComponent } from './pokemons/pokemon-list/pokemon-list.compo
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 
+
+
+import { AuthModule } from './auth/auth.module';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -20,6 +24,8 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
     BrowserAnimationsModule,
     HttpClientModule,
     PokemonsModule,
+
+    AuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]

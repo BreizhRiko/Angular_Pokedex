@@ -30,12 +30,11 @@ export class PokemonService {
   }
 
   public getPokemonParams(limit?: number, offset?: number, search?: string): Observable<PagedData<Pokemon>> {
-    const url = 'http://pokedex-api.cleverapps.io/pokemons';
     let params = new HttpParams();
     if(offset) params = params.append('offset', offset);
     if(limit) params = params.append('limit', limit);
     if(search) params = params.append('search', search);
-    return this.http.get<PagedData<Pokemon>>(url , { params: params });
+    return this.http.get<PagedData<Pokemon>>(this.pokemonUrl , { params: params });
   }
 
 }
