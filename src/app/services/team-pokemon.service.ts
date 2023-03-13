@@ -21,7 +21,8 @@ export class TeamPokemonService {
    }
 
   getData(): Observable<number[]>{
-    if(this.auth.authOk == false){
+    if(localStorage.getItem('acces') == "false"){
+      console.log("erreur auth");
       return of(new Array<number>);
     }
     let access_token = localStorage.getItem('acces_token');

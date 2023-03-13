@@ -28,6 +28,7 @@ export class AuthComponent implements OnInit{
               private router: Router) { }
 
   ngOnInit(): void {
+    localStorage.setItem('acces',"false");
     this.loginForm = this.formBuilder.group({
       email: ['', Validators.required],
       password: ['', Validators.required]
@@ -43,6 +44,7 @@ export class AuthComponent implements OnInit{
         this.reponsePost = reponsePost;
         console.log(reponsePost);
         localStorage.setItem('acces_token',reponsePost.access_token);
+        localStorage.setItem('acces',"true");
         this.authOk = true;
         this.router.navigate(['pokedex']);
       }

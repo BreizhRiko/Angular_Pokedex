@@ -15,12 +15,13 @@ import { AuthService } from '../../services/auth.service';
 export class TeamsComponent implements OnInit {
   accesToken!: string | null | undefined;
   team: Pokemon[] = [];
-  listeId!: Observable<number[]>;
+  listeId!: number[];
 
   constructor(private teamPokemonService : TeamPokemonService, private pokemonS : PokemonService) { }
 
   ngOnInit() {
     console.log("team");
+
 
     this.getTeamPokemon();
   }
@@ -29,17 +30,26 @@ export class TeamsComponent implements OnInit {
     this.teamPokemonService.getData().subscribe({
       next: (value) => {
         console.log(value);
+        this.listeId = value;
 
         this.team = [];
-
         for (let index = 0; index < value.length; index++) {
           this.pokemonS.getPokemon(value[index]).subscribe(pokemon => {
             this.team.push(pokemon);
-            console.log(pokemon);
           })
         }
+        console.log(this.team);
+
       }
     });
+  }
+
+  postTeamPokemon(): void {
+    this.teamPokemonService.sendData(this.listeId).subscribe({
+      next: (reponse) => {
+        console.log(reponse);
+      }
+    })
   }
 
 }
