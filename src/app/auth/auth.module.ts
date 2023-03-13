@@ -15,6 +15,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AuthComponent],
+  providers: [
+    AuthComponent
+  ],
   imports: [
     CommonModule,
     MatFormFieldModule,

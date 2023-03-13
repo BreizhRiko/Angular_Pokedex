@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnInit, Output } from '@angular/core';
 
 import { Pokemon } from '../../model/pokemon';
 import { PagedData } from "../../model/PagedData";
@@ -6,27 +6,32 @@ import { PokemonService } from '../../services/pokemon.service';
 
 import { Observable, Subject } from 'rxjs';
 
+import { ViewChild, AfterViewInit } from '@angular/core';
+import { MatNavList } from '@angular/material/list';
+
 @Component({
   selector: 'app-pokemon-list',
   templateUrl: './pokemon-list.component.html',
   styleUrls: ['./pokemon-list.component.scss']
 })
 
-
 export class PokemonListComponent implements OnInit{
   @Output() selected = new EventEmitter<number>();
 
+  @ViewChild('liste', {read: ElementRef}) liste?: ElementRef<HTMLElement>;
+
   hide = true;
   pokemons!: PagedData<Pokemon>;
-  private searchTerms = new Subject<string>();
 
   constructor(private pokemonService: PokemonService) { }
 
   ngOnInit(): void {
-
     this.getPokemons();
   }
 
+  /**
+   *
+   */
   onScroll(): void{
     this.pokemonService.getPokemonParams(10, this.pokemons?.data.length, this.query).subscribe({
     next: (pagedData) => {
@@ -38,25 +43,40 @@ export class PokemonListComponent implements OnInit{
 
   }
 
+  /**
+   *
+   * @param pokemon
+   */
   selectPokemon(pokemon : Pokemon ): void {
     this.selected.emit(pokemon.id);
   }
 
   query: string = '';
 
+  /**
+   *
+   * TODO: add view chield / element ref / scroll into view
+   * @param q
+   */
   search(q: string): void {
     this.query =q;
     console.log(this.query);
-
+    (<HTMLElement>this.liste?.nativeElement).firstElementChild?.scrollIntoView();
     this.getPokemons();
-    //get pokemon // si query qq chose choix avec string sinon comme maintenant
   }
 
+  /**
+   * Utiliser quand l'utilisateur clique sur la poubelle pour clear la query
+   */
   clearSearch() {
     this.query = '';
+    (<HTMLElement>this.liste?.nativeElement).firstElementChild?.scrollIntoView();
     this.getPokemons();
   }
 
+  /**
+   * Fonction permettant de récuperer depuis le pokemonService notre PagedData de pokemon
+   */
   getPokemons(): void {
     this.pokemonService.getPokemonParams(20,0,this.query).subscribe({
       next: (pagedData) => {

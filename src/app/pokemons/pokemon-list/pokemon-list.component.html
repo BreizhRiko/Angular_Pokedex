@@ -7,8 +7,8 @@
 </mat-form-field>
 
 
-<mat-nav-list infinite-scroll (scrolled)="onScroll()" [scrollWindow]="false" class="mat-nav-list-pokemon">
-  <mat-list-item *ngFor="let pokemon of pokemons?.data" (click) ="selectPokemon(pokemon)" >
+<mat-nav-list infinite-scroll (scrolled)="onScroll()"  [scrollWindow]="false" class="mat-nav-list-pokemon" id="pokemons-liste" role="list" #liste>
+  <mat-list-item *ngFor="let pokemon of pokemons?.data" (click) ="selectPokemon(pokemon)" role="listitem">
     <img matListItemAvatar
       src="assets/img/sprites/{{pokemon.id}}.png"
       alt="image pokemon {{pokemon.name}}">

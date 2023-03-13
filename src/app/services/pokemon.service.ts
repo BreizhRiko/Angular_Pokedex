@@ -15,7 +15,7 @@ const httpOptions = {
 })
 export class PokemonService {
 
-  constructor(private http: HttpClient,private messageService: MessageService) { }
+  constructor(private http: HttpClient) { }
 
   private pokemonUrl = 'http://pokedex-api.cleverapps.io/pokemons';
 
