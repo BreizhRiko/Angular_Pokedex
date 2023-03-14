@@ -8,13 +8,16 @@ import { AuthComponent } from '../auth/auth.component';
   providedIn: 'root'
 })
 export class TeamPokemonService {
-  private team: number[]=[];
+  getTeamPokemon() {
+    throw new Error('Method not implemented.');
+  }
+  public teamId: number[]=[];
 
   apiUrl = "http://pokedex-api.cleverapps.io";
   constructor(private http: HttpClient,private auth: AuthComponent) {
     this.getData().subscribe({
       next: (team) => {
-        this.team = team;
+        this.teamId = team;
       }
     })
 
@@ -30,14 +33,18 @@ export class TeamPokemonService {
     return this.http.get<number[]>(`${this.apiUrl}/trainers/me/team`, { headers });
   }
 
-  sendData(data: number[]) {
+  sentDataPut(){
     let access_token = localStorage.getItem('acces_token');
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${access_token}`);
-    return this.http.post<any>(`${this.apiUrl}/trainers/me/team`, data, { headers })
-      .pipe(map(response => {
-        console.log(response);
-        return response;
-      }));
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + access_token
+      })
+    };
+    console.log(this.teamId);
+
+    return this.http.put(`${this.apiUrl}/trainers/me/team`, this.teamId, httpOptions);
   }
+
+
 
 }

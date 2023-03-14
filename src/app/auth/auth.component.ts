@@ -29,6 +29,7 @@ export class AuthComponent implements OnInit{
 
   ngOnInit(): void {
     localStorage.setItem('acces',"false");
+    localStorage.setItem('acces_token',"");
     this.loginForm = this.formBuilder.group({
       email: ['', Validators.required],
       password: ['', Validators.required]

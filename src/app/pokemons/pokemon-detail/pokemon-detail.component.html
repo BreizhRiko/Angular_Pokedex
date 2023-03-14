@@ -5,8 +5,11 @@
   <mat-card-content>
     <mat-grid-list cols="5" rowHeight="200">
       <mat-grid-tile>
-        <button mat-raised-button color="primary" routerLink="">
-        </button>
+        <div>
+          <button mat-raised-button color="primary" (click)="addPokemonToTeam(pokemon.id)" class="bp-size-1">Add Pokemon To Team</button>
+
+          <button mat-raised-button color="primary" (click)="goToTeam()" class="bp-size-2" >Team</button>
+        </div>
       </mat-grid-tile>
       <mat-grid-tile colspan="2">
         <div class="image_css">

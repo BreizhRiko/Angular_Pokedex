@@ -1,11 +1,8 @@
-import { Observable } from 'rxjs';
+import { forkJoin } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
-import { Team } from '../../model/team';
 import { Pokemon } from '../../model/pokemon';
 import { TeamPokemonService } from '../../services/team-pokemon.service';
 import { PokemonService } from '../../services/pokemon.service';
-
-import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-teams',
@@ -13,43 +10,75 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./teams.component.css']
 })
 export class TeamsComponent implements OnInit {
+
   accesToken!: string | null | undefined;
-  team: Pokemon[] = [];
-  listeId!: number[];
+  teamPokemon: Pokemon[] = [];
+  tempTeamPokemon: Pokemon[] = [];
 
   constructor(private teamPokemonService : TeamPokemonService, private pokemonS : PokemonService) { }
 
   ngOnInit() {
     console.log("team");
-
-
+    //a changer
     this.getTeamPokemon();
   }
 
   getTeamPokemon(): void {
+    console.log("Get Team");
+
     this.teamPokemonService.getData().subscribe({
       next: (value) => {
         console.log(value);
-        this.listeId = value;
+        this.teamPokemonService.teamId = value;
 
-        this.team = [];
-        for (let index = 0; index < value.length; index++) {
-          this.pokemonS.getPokemon(value[index]).subscribe(pokemon => {
-            this.team.push(pokemon);
-          })
-        }
-        console.log(this.team);
+        const observables = value.map(id => this.pokemonS.getPokemon(id));
 
+        forkJoin(observables).subscribe(team => {
+          this.teamPokemon = team;
+          console.log(this.teamPokemon);
+        });
       }
     });
   }
 
-  postTeamPokemon(): void {
-    this.teamPokemonService.sendData(this.listeId).subscribe({
+  putTeamPokemon(): void {
+    console.log("Post Team");
+    this.teamPokemonService.sentDataPut().subscribe({
       next: (reponse) => {
         console.log(reponse);
+        this.getTeamPokemon();
       }
     })
+  }
+
+  moveLeft(pokemon: Pokemon): void {
+    const currentIndex = this.teamPokemon.indexOf(pokemon);
+    const previousIndex = currentIndex - 1;
+    this.swapPokemonsId(currentIndex, previousIndex);
+    }
+
+  moveRight(pokemon: Pokemon): void {
+    const currentIndex = this.teamPokemon.indexOf(pokemon);
+    const nextIndex = currentIndex + 1;
+    this.swapPokemonsId(currentIndex, nextIndex);
+  }
+
+  swapPokemonsId(currentIndex: number, nextIndex: number) {
+    const temp = this.teamPokemonService.teamId[currentIndex];
+    this.teamPokemonService.teamId[currentIndex] = this.teamPokemonService.teamId[nextIndex];
+    this.teamPokemonService.teamId[nextIndex] = temp;
+    console.log(this.teamPokemonService.teamId);
+
+    this.putTeamPokemon();
+  }
+
+  remove(pokemon: Pokemon): void {
+    const index = this.teamPokemon.indexOf(pokemon);
+    console.log(index);
+    if (index !== -1) {
+      this.teamPokemonService.teamId.splice(index, 1);
+    }
+    this.putTeamPokemon();
   }
 
 }

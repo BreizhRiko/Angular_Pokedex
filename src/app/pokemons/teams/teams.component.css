@@ -1,0 +1,24 @@
+.image_css {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card-content-info{
+  display: flex;
+  justify-content: center;
+}
+
+.card-actions-bp{
+  display: flex;
+  justify-content: center;
+}
+.matgridlist{
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-gap: 10px;
+  justify-items: center;
+  }

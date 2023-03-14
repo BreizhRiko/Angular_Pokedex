@@ -1,7 +1,7 @@
 
-<div class="container">
-  <mat-sidenav mode="over" opened class="sidenav">
-    <mat-nav-list>
+<mat-sidenav-container class="container" >
+  <mat-sidenav mode="side" opened class="sidenav">
+    <mat-nav-list class="nav-list">
       <a mat-list-item routerLink="/pokedex">
         <mat-icon mat-list-icon>home</mat-icon>
         <span mat-line>Pokedex</span>
@@ -17,7 +17,7 @@
     </mat-nav-list>
   </mat-sidenav>
 
-  <main>
+  <mat-sidenav-content class="sidenav-content-router">
     <router-outlet></router-outlet>
-  </main>
-</div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

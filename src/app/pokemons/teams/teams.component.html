@@ -1,3 +1,31 @@
-<p>
-  teams works!
-</p>
+<ng-container *ngIf="teamPokemon.length === 0; else pokemonList">
+  <p>Aucun Pokemon dans l'equipe.</p>
+</ng-container>
+
+<ng-template #pokemonList>
+  <mat-grid-list cols="3" rowHeight="1:1" class="matgridlist">
+    <mat-card *ngFor="let pokemon of teamPokemon">
+      <mat-card>
+        <mat-card-header routerLink="../pokedex/{{pokemon.id}}">
+          <div class="image_css">
+            <img mat-card-lg-image src="assets/img/official-artwork/{{pokemon.id}}.png"/>
+          </div>
+        </mat-card-header>
+        <mat-card-content class="card-content-info">
+          <p>No. {{pokemon.id | number: '3.0-0'}} - {{ pokemon.name }}</p>
+        </mat-card-content>
+        <mat-card-actions class="card-actions-bp">
+          <button mat-icon-button (click)="moveLeft(pokemon)" [disabled]="teamPokemon.indexOf(pokemon) === 0">
+            <mat-icon>keyboard_arrow_left</mat-icon>
+          </button>
+          <button mat-icon-button (click)="remove(pokemon)">
+            <mat-icon>delete</mat-icon>
+          </button>
+          <button mat-icon-button (click)="moveRight(pokemon)" [disabled]="teamPokemon.indexOf(pokemon) === teamPokemon.length - 1">
+            <mat-icon>keyboard_arrow_right</mat-icon>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </mat-card>
+  </mat-grid-list>
+</ng-template>

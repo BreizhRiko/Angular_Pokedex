@@ -1,7 +1,12 @@
 :host {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   height: 100%;
+  width: 100%;
+}
+
+.sidenav-content-router{
+  width: 100%;
 }
 
 .container {
@@ -10,12 +15,22 @@
   flex: 1 1 auto;
 }
 
-mat-sidenav {
+.sidenav {
   flex: 0 0 auto;
+  display: flex;
+  align-items: center;
 }
 
 main {
   flex: 1 1 auto;
   overflow: auto;
-  margin-left: 175px;
+  display: flex;
+  justify-content: center;
+}
+
+.nav-list{
+  height: 95%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }

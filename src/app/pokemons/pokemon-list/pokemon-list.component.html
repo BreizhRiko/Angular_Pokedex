@@ -8,7 +8,8 @@
 
 
 <mat-nav-list infinite-scroll (scrolled)="onScroll()"  [scrollWindow]="false" class="mat-nav-list-pokemon" id="pokemons-liste" role="list" #liste>
-  <mat-list-item *ngFor="let pokemon of pokemons?.data" (click) ="selectPokemon(pokemon)" role="listitem">
+  <mat-list-item *ngFor="let pokemon of pokemons?.data" (click) ="selectPokemon(pokemon)" role="listitem" >
+    <a routerLink="pokedex/{{pokemon.id}}" style="display:none;"></a>
     <img matListItemAvatar
       src="assets/img/sprites/{{pokemon.id}}.png"
       alt="image pokemon {{pokemon.name}}">

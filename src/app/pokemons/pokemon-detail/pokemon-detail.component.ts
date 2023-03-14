@@ -1,9 +1,10 @@
+import { TeamPokemonService } from 'src/app/services/team-pokemon.service';
+import { TeamsComponent } from './../teams/teams.component';
 import { Pokemon } from '../../model/pokemon';
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { PokemonService } from 'src/app/services/pokemon.service';
-import {MatIconModule} from '@angular/material/icon'
 
 @Component({
   selector: 'app-pokemon-detail',
@@ -11,7 +12,7 @@ import {MatIconModule} from '@angular/material/icon'
   styleUrls: ['./pokemon-detail.component.css']
 })
 
-export class PokemonDetailComponent implements OnChanges {
+export class PokemonDetailComponent implements OnChanges,OnInit {
   @Input() pokemonId?: number;
 
   pokemon?: Pokemon;
@@ -19,9 +20,21 @@ export class PokemonDetailComponent implements OnChanges {
   constructor(
     private route: ActivatedRoute,
     private pokemonService: PokemonService,
-    private location: Location
+    private location: Location,
+    private router: Router,
+    private teamS: TeamPokemonService
   ) { }
 
+  ngOnInit(): void {
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    if(id!=0){
+      this.pokemonService.getPokemon(id).subscribe({
+        next: (pokemon) => {
+          this.pokemon = pokemon;
+          this.playAudio(id);
+        }});
+    }
+  }
 
   ngOnChanges(): void {
     if(this.pokemonId != null){
@@ -34,6 +47,37 @@ export class PokemonDetailComponent implements OnChanges {
         }})
       ;
     }
+  }
+
+  addPokemonToTeam(id: number): void{
+    if(this.teamS.teamId.length < 6){
+      this.teamS.teamId.push(id);
+
+      console.log("teamId : ",this.teamS.teamId);
+
+      this.teamS.sentDataPut().subscribe({
+        next: (reponse) => {
+          console.log(reponse);
+
+          this.teamS.getData().subscribe({
+            next: (value) => {
+              console.log("get data : ",value);
+              this.teamS.teamId = value;
+            }
+          });
+        }
+      })
+    }
+    else{
+
+      
+    }
+  }
+
+
+
+  goToTeam(): void{
+    this.router.navigate(['team']);
   }
 
   playAudio(id: number): void {
