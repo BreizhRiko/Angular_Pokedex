@@ -14,6 +14,7 @@ export class TeamsComponent implements OnInit {
   accesToken!: string | null | undefined;
   teamPokemon: Pokemon[] = [];
   tempTeamPokemon: Pokemon[] = [];
+  connected: boolean = false;
 
   constructor(private teamPokemonService : TeamPokemonService, private pokemonS : PokemonService) { }
 
@@ -24,6 +25,7 @@ export class TeamsComponent implements OnInit {
   }
 
   getTeamPokemon(): void {
+    if(localStorage.getItem('acces_token') !=  ""){this.connected = true;}else{this.connected = false;}
     console.log("Get Team");
 
     this.teamPokemonService.getData().subscribe({
@@ -42,7 +44,6 @@ export class TeamsComponent implements OnInit {
   }
 
   putTeamPokemon(): void {
-    console.log("Post Team");
     this.teamPokemonService.sentDataPut().subscribe({
       next: (reponse) => {
         console.log(reponse);
