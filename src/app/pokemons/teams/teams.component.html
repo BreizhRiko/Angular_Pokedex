@@ -3,8 +3,8 @@
 </ng-container>
 
 <ng-template #pokemonList>
-  <mat-grid-list cols="3" rowHeight="1:1" class="matgridlist">
-    <mat-card *ngFor="let pokemon of teamPokemon">
+  <mat-grid-list cols="3" class="matgridlist">
+    <mat-grid-tile *ngFor="let pokemon of teamPokemon">
       <mat-card>
         <mat-card-header routerLink="../pokedex/{{pokemon.id}}">
           <div class="image_css">
@@ -26,6 +26,6 @@
           </button>
         </mat-card-actions>
       </mat-card>
-    </mat-card>
+    </mat-grid-tile>
   </mat-grid-list>
 </ng-template>
