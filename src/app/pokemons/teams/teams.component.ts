@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Pokemon } from '../../model/pokemon';
 import { TeamPokemonService } from '../../services/team-pokemon.service';
 import { PokemonService } from '../../services/pokemon.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-teams',
@@ -16,7 +17,10 @@ export class TeamsComponent implements OnInit {
   tempTeamPokemon: Pokemon[] = [];
   connected: boolean = false;
 
-  constructor(private teamPokemonService : TeamPokemonService, private pokemonS : PokemonService) { }
+  constructor(
+    private teamPokemonService : TeamPokemonService,
+    private pokemonS : PokemonService,
+    private router: Router) { }
 
   ngOnInit() {
     console.log("team");
@@ -30,15 +34,19 @@ export class TeamsComponent implements OnInit {
 
     this.teamPokemonService.getData().subscribe({
       next: (value) => {
-        console.log(value);
+        console.log("get ",value);
         this.teamPokemonService.teamId = value;
 
-        const observables = value.map(id => this.pokemonS.getPokemon(id));
+        if(value.length != 0){
+          const observables = value.map(id => this.pokemonS.getPokemon(id));
 
-        forkJoin(observables).subscribe(team => {
-          this.teamPokemon = team;
-          console.log(this.teamPokemon);
-        });
+          forkJoin(observables).subscribe(team => {
+            this.teamPokemon = team;
+            console.log(this.teamPokemon);
+          });
+        } else {
+          this.teamPokemon = [];
+        }
       }
     });
   }
@@ -46,7 +54,7 @@ export class TeamsComponent implements OnInit {
   putTeamPokemon(): void {
     this.teamPokemonService.sentDataPut().subscribe({
       next: (reponse) => {
-        console.log(reponse);
+        console.log("put",reponse);
         this.getTeamPokemon();
       }
     })
@@ -82,4 +90,9 @@ export class TeamsComponent implements OnInit {
     this.putTeamPokemon();
   }
 
+
+
+  goToPokedex(): void{
+    this.router.navigate(['pokedex']);
+  }
 }

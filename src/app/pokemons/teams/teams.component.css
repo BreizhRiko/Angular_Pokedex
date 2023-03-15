@@ -35,6 +35,10 @@
   justify-content: center;
 }
 
+.header-image_notConnected{
+  height: 500px;
+  width:  400px;
+}
 
 .header-image_noTeam {
   height: 400px;
@@ -46,5 +50,14 @@
   height: 100%;
   width: 100%;
   align-items: center;
+  justify-content: center;
+}
+
+.bp-size-2
+{
+  top: 20px;
+  height: 30px;
+  width: 100%;
+  text-align: center;
   justify-content: center;
 }

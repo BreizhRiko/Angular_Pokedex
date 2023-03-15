@@ -1,4 +1,28 @@
-<ng-container *ngIf="connected == false; else pokemonList">
+<ng-container *ngIf="connected == false">
+  <mat-card class="matCard_noTeam">
+    <mat-card-header>
+      <img mat-card-lg-image
+        src="https://media.electre-ng.com/images/image-id/c9b0c96d15ed8f6c6aa6fbd584be64c0971faa02262d7a9a21e28abf91aa39d8.jpg"
+        class="header-image_notConnected"/>
+    </mat-card-header>
+
+    <p></p>
+
+    <mat-card-title>T E A M -- P O K E D E X</mat-card-title>
+    <mat-card-subtitle>Information</mat-card-subtitle>
+
+    <mat-card-content>
+      <p></p>
+      <p>Not connected.</p>
+    </mat-card-content>
+    <mat-card-content>
+
+    </mat-card-content>
+  </mat-card>
+</ng-container>
+
+
+<ng-container *ngIf="teamPokemon.length <= 0 && connected == true">
   <mat-card class="matCard_noTeam">
     <mat-card-header>
       <img mat-card-lg-image
@@ -16,12 +40,13 @@
       <p>No Pokemon in the team.</p>
     </mat-card-content>
     <mat-card-content>
-
+      <button mat-raised-button color="primary" (click)="goToPokedex()" class="bp-size-2" >Pokedex</button>
     </mat-card-content>
   </mat-card>
 </ng-container>
 
-<ng-template #pokemonList>
+
+<ng-container *ngIf="connected == true && teamPokemon.length >= 1">
   <mat-grid-list cols="3" class="matgridlist" *ngFor="let pokemon of teamPokemon">
     <mat-card>
       <mat-card-header routerLink="../pokedex/{{pokemon.id}}">
@@ -45,4 +70,4 @@
       </mat-card-actions>
     </mat-card>
   </mat-grid-list>
-</ng-template>
+</ng-container>
