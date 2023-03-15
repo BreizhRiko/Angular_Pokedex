@@ -8,7 +8,26 @@
       <app-pokemon-detail *ngIf="selectedPokemonId" [pokemonId]="selectedPokemonId"></app-pokemon-detail>
     </div>
     <ng-template #noPokemonSelected>
-      <p>Selectionné un Pokemon depuis la liste pour l'afficher.</p>
+      <mat-card class="matCard">
+        <mat-card-header class="matCardHeader">
+          <img mat-card-lg-image
+            src="https://img.20mn.fr/N44cqcYFSumSWAJyRT5QuSk/1200x768_certains-personnages-pokemon-mystery-dungeon"
+            class="header-image"/>
+        </mat-card-header>
+
+        <p></p>
+
+        <mat-card-title>P O K E D E X</mat-card-title>
+        <mat-card-subtitle>Information</mat-card-subtitle>
+
+        <mat-card-content class="matCardContent">
+          <p></p>
+          <p>Select a Pokemon from the list to display it.</p>
+        </mat-card-content>
+        <mat-card-content>
+
+        </mat-card-content>
+      </mat-card>
     </ng-template>
   </mat-sidenav-content>
 </mat-sidenav-container>
