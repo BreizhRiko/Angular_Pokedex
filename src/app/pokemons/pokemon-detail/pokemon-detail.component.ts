@@ -25,6 +25,11 @@ export class PokemonDetailComponent implements OnChanges,OnInit {
     private teamS: TeamPokemonService
   ) { }
 
+  /**
+   * OnInit
+   * get pokemon informations
+   * and play it's audio
+   */
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     if(id!=0){
@@ -36,6 +41,11 @@ export class PokemonDetailComponent implements OnChanges,OnInit {
     }
   }
 
+  /**
+   * OnChange
+   * get pokemon informations
+   * and play it's audio
+   */
   ngOnChanges(): void {
     if(this.pokemonId != null){
       const id = this.pokemonId;
@@ -49,6 +59,12 @@ export class PokemonDetailComponent implements OnChanges,OnInit {
     }
   }
 
+  /**
+   * add a pokemon to the user's team
+   * DataPut : sends our array to the API
+   * GetData : retrieve and update the team displayed from the API
+   * @param id pokemon id
+   */
   addPokemonToTeam(id: number): void{
     if(this.teamS.teamId.length < 6){
       this.teamS.teamId.push(id);
@@ -70,25 +86,25 @@ export class PokemonDetailComponent implements OnChanges,OnInit {
     }
     else{
 
-      
     }
   }
 
-
-
+/**
+ * navigate to : /team
+ */
   goToTeam(): void{
     this.router.navigate(['team']);
   }
 
+  /**
+   * plays the sound of selected pokemon
+   * @param id Pokemon id
+   */
   playAudio(id: number): void {
     const audio = new Audio();
     audio.src = "../../../assets/audio/"+id+".mp3";
     audio.load();
     audio.play();
-  }
-
-  formatNumber(num: number, width: number): string {
-    return num.toString().padStart(width, '0');
   }
 
 }

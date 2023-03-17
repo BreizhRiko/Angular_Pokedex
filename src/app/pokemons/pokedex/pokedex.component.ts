@@ -17,6 +17,11 @@ export class PokedexComponent{
 
   constructor(private pokemonService: PokemonService) { }
 
+  /**
+   * retrieves the ID of the selected pokémon
+   * to display its details
+   * @param id id of selected pokemon
+   */
   selectItem(id: number) {
     this.selectedPokemonId = id;
   }

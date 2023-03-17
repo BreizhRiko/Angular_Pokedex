@@ -1,15 +1,15 @@
-<mat-sidenav-container class="test" autosize="true">
+<mat-sidenav-container class="sidenav-container" autosize="true">
   <mat-sidenav mode="side" opened="true">
     <app-pokemon-list (selected)="selectItem($event)"></app-pokemon-list>
   </mat-sidenav>
 
-  <mat-sidenav-content fill class="detail-pokemon">
+  <mat-sidenav-content fill>
     <div *ngIf="selectedPokemonId; else noPokemonSelected">
       <app-pokemon-detail *ngIf="selectedPokemonId" [pokemonId]="selectedPokemonId"></app-pokemon-detail>
     </div>
     <ng-template #noPokemonSelected>
       <mat-card class="matCard">
-        <mat-card-header class="matCardHeader">
+        <mat-card-header>
           <img mat-card-lg-image
             src="https://img.20mn.fr/N44cqcYFSumSWAJyRT5QuSk/1200x768_certains-personnages-pokemon-mystery-dungeon"
             class="header-image"/>
@@ -20,7 +20,7 @@
         <mat-card-title>P O K E D E X</mat-card-title>
         <mat-card-subtitle>Information</mat-card-subtitle>
 
-        <mat-card-content class="matCardContent">
+        <mat-card-content>
           <p></p>
           <p>Select a Pokemon from the list to display it.</p>
         </mat-card-content>

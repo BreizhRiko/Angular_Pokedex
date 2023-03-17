@@ -4,12 +4,12 @@
   align-items: center;
 }
 
-.bp-size-1{
+.raised-button-size-1{
   top: 0;
   height: auto;
 }
 
-.bp-size-2
+.raised-button-size-2
 {
   top: 20px;
   height: 30px;
