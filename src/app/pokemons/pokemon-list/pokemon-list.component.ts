@@ -17,11 +17,10 @@ import { MatNavList } from '@angular/material/list';
 
 export class PokemonListComponent implements OnInit{
   @Output() selected = new EventEmitter<number>();
-
   @ViewChild('liste', {read: ElementRef}) liste?: ElementRef<HTMLElement>;
 
-  hide = true;
   pokemons!: PagedData<Pokemon>;
+  query: string = '';
 
   constructor(private pokemonService: PokemonService) { }
 
@@ -38,9 +37,7 @@ export class PokemonListComponent implements OnInit{
       if(this.pokemons) {
         this.pokemons.data = this.pokemons.data.concat(pagedData.data);
       }
-    }
-  });
-
+    }});
   }
 
   /**
@@ -51,11 +48,8 @@ export class PokemonListComponent implements OnInit{
     this.selected.emit(pokemon.id);
   }
 
-  query: string = '';
-
   /**
    *
-   * TODO: add view chield / element ref / scroll into view
    * @param q
    */
   search(q: string): void {
@@ -66,7 +60,7 @@ export class PokemonListComponent implements OnInit{
   }
 
   /**
-   * Utiliser quand l'utilisateur clique sur la poubelle pour clear la query
+   * Use when the user clicks on the trash can to clear the query
    */
   clearSearch() {
     this.query = '';
@@ -75,7 +69,7 @@ export class PokemonListComponent implements OnInit{
   }
 
   /**
-   * Fonction permettant de récuperer depuis le pokemonService notre PagedData de pokemon
+   * Function to retrieve from the pokemonService our pokemon PagedData
    */
   getPokemons(): void {
     this.pokemonService.getPokemonParams(20,0,this.query).subscribe({

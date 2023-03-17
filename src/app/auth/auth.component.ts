@@ -17,7 +17,6 @@ import { empty } from 'rxjs';
 export class AuthComponent implements OnInit{
   authOk : boolean = false;
 
-  hide = true;
   loginForm!: FormGroup;
   message!: string;
 
@@ -27,6 +26,9 @@ export class AuthComponent implements OnInit{
               private authService: AuthService,
               private router: Router) { }
 
+  /**
+   * logout on init
+   */
   ngOnInit(): void {
     localStorage.setItem('acces',"false");
     localStorage.setItem('acces_token',"");
@@ -36,6 +38,9 @@ export class AuthComponent implements OnInit{
     });
   }
 
+  /**
+   * Authentication management via API postman
+   */
   submitForm(): void {
     const email = this.loginForm.controls['email'].value;
     const password = this.loginForm.controls['password'].value;
@@ -52,10 +57,4 @@ export class AuthComponent implements OnInit{
     });
   }
 
-  getReponsePostUtilisateur(){
-    if(this.reponsePost != null){
-      return this.reponsePost;
-    }
-    return null;
-  }
 }
