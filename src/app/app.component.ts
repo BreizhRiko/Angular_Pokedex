@@ -12,5 +12,7 @@ export class AppComponent implements OnInit {
   }
   title = 'pokedex tp Eric LE MEUR - LE4';
 
+  // old main css
+  //main {   flex: 1 1 auto;   overflow: auto;  display: flex;  justify-content: center;
 
 }

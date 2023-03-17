@@ -18,11 +18,13 @@ export class TeamPokemonService {
     this.getData().subscribe({
       next: (team) => {
         this.teamId = team;
-      }
-    })
-
+      }})
    }
 
+  /**
+   * get the new team from the API
+   * @returns
+   */
   getData(): Observable<number[]>{
     if(localStorage.getItem('acces') == "false"){
       console.log("erreur auth");
@@ -33,6 +35,11 @@ export class TeamPokemonService {
     return this.http.get<number[]>(`${this.apiUrl}/trainers/me/team`, { headers });
   }
 
+  /**
+   * send the new team to the API
+   * from the teamID list
+   * @returns put validation
+   */
   sentDataPut(){
     let access_token = localStorage.getItem('acces_token');
     const httpOptions = {
@@ -44,7 +51,4 @@ export class TeamPokemonService {
 
     return this.http.put(`${this.apiUrl}/trainers/me/team`, this.teamId, httpOptions);
   }
-
-
-
 }

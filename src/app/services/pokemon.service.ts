@@ -20,15 +20,30 @@ export class PokemonService {
   private pokemonUrl = 'http://pokedex-api.cleverapps.io/pokemons';
 
 
+  /**
+   * @returns pokemon list
+   */
   getPokemons(): Observable<PagedData<Pokemon>> {
     return this.http.get<PagedData<Pokemon>>(this.pokemonUrl);
   }
 
+  /**
+   * get the information of a pokemon for a given id
+   * @param id pokemon id
+   * @returns pokemon list
+   */
   getPokemon(id: number): Observable<Pokemon> {
     const url = `${this.pokemonUrl}/${id}`;
     return this.http.get<Pokemon>(url);
   }
 
+  /**
+   * request a list of pokemon to display to the postman API according to our parameters
+   * @param limit number of pokemon to display
+   * @param offset offset
+   * @param search query
+   * @returns pokemon list
+   */
   public getPokemonParams(limit?: number, offset?: number, search?: string): Observable<PagedData<Pokemon>> {
     let params = new HttpParams();
     if(offset) params = params.append('offset', offset);

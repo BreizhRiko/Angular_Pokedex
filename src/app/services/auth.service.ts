@@ -13,6 +13,12 @@ export class AuthService {
 
    }
 
+   /**
+    * Allows you to query the API to see if you can connect with a given email / password
+    * @param email
+    * @param password
+    * @returns access_token, refresh_token, expires_in
+    */
    login(email: string, password: string) {
     const body = { email, password };
     return this.http.post<any>(`${this.apiUrl}/auth/login`, body)
