@@ -29,7 +29,7 @@ export class PokemonListComponent implements OnInit{
   }
 
   /**
-   *
+   * allows to load more pokemon from the API when you scroll
    */
   onScroll(): void{
     this.pokemonService.getPokemonParams(10, this.pokemons?.data.length, this.query).subscribe({
@@ -41,7 +41,7 @@ export class PokemonListComponent implements OnInit{
   }
 
   /**
-   *
+   * emits the pokemon's id
    * @param pokemon
    */
   selectPokemon(pokemon : Pokemon ): void {
@@ -49,8 +49,10 @@ export class PokemonListComponent implements OnInit{
   }
 
   /**
+   * allows to search the API from the query informations
    *
-   * @param q
+   * return (single pokemon / list with common letter)
+   * @param q query string
    */
   search(q: string): void {
     this.query =q;
