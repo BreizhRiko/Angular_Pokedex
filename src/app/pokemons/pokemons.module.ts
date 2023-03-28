@@ -14,6 +14,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 import { TeamsComponent } from './teams/teams.component';
 
@@ -37,7 +38,8 @@ import { TeamsComponent } from './teams/teams.component';
     InfiniteScrollModule,
     MatSidenavModule,
     MatInputModule,
-    FormsModule
+    FormsModule,
+    MatTooltipModule
   ]
 })
 export class PokemonsModule {

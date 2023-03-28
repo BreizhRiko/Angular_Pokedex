@@ -6,8 +6,11 @@
     <mat-grid-list cols="5" rowHeight="200">
       <mat-grid-tile>
         <div>
-          <button mat-raised-button color="primary" (click)="addPokemonToTeam(pokemon.id)" class="raised-button-size-1">Add Pokemon To Team</button>
-
+          <div matTooltip="Already 6 pokemons in the team" [matTooltipDisabled]="teamLength < 6">
+            <button mat-raised-button color="primary" (click)="addPokemonToTeam(pokemon.id)" [disabled]="teamLength == 6" class="raised-button-size-1">
+              Add Pokemon To Team
+            </button>
+          </div>
           <button mat-raised-button color="primary" (click)="goToTeam()" class="raised-button-size-2" >Team</button>
         </div>
       </mat-grid-tile>

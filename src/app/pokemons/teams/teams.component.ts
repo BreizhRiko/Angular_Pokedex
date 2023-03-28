@@ -96,7 +96,6 @@ export class TeamsComponent implements OnInit {
     const temp = this.teamPokemonService.teamId[currentIndex];
     this.teamPokemonService.teamId[currentIndex] = this.teamPokemonService.teamId[nextIndex];
     this.teamPokemonService.teamId[nextIndex] = temp;
-    console.log(this.teamPokemonService.teamId);
 
     this.putTeamPokemon();
   }
@@ -108,7 +107,6 @@ export class TeamsComponent implements OnInit {
    */
   remove(pokemon: Pokemon): void {
     const index = this.teamPokemon.indexOf(pokemon);
-    console.log(index);
     if (index !== -1) {
       this.teamPokemonService.teamId.splice(index, 1);
     }

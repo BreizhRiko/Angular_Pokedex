@@ -48,7 +48,7 @@ export class AuthComponent implements OnInit{
     this.authService.login(email, password).subscribe({
       next: (reponsePost: AuthPost) => {
         this.reponsePost = reponsePost;
-        console.log(reponsePost);
+
         localStorage.setItem('acces_token',reponsePost.access_token);
         localStorage.setItem('acces',"true");
         this.authOk = true;

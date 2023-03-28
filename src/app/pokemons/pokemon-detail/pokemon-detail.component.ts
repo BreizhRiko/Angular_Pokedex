@@ -16,6 +16,7 @@ export class PokemonDetailComponent implements OnChanges,OnInit {
   @Input() pokemonId?: number;
 
   pokemon?: Pokemon;
+  teamLength: number = 0;
 
   constructor(
     private route: ActivatedRoute,
@@ -31,6 +32,7 @@ export class PokemonDetailComponent implements OnChanges,OnInit {
    * and play it's audio
    */
   ngOnInit(): void {
+    this.teamLength = this.teamS.teamId.length;
     const id = Number(this.route.snapshot.paramMap.get('id'));
     if(id!=0){
       this.pokemonService.getPokemon(id).subscribe({
@@ -69,24 +71,19 @@ export class PokemonDetailComponent implements OnChanges,OnInit {
     if(this.teamS.teamId.length < 6){
       this.teamS.teamId.push(id);
 
-      console.log("teamId : ",this.teamS.teamId);
-
       this.teamS.sentDataPut().subscribe({
         next: (reponse) => {
-          console.log(reponse);
 
           this.teamS.getData().subscribe({
             next: (value) => {
-              console.log("get data : ",value);
               this.teamS.teamId = value;
             }
           });
         }
       })
-    }
-    else{
 
     }
+    this.teamLength = this.teamS.teamId.length;
   }
 
 /**

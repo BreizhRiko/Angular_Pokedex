@@ -27,7 +27,6 @@ export class TeamPokemonService {
    */
   getData(): Observable<number[]>{
     if(localStorage.getItem('acces') == "false"){
-      console.log("erreur auth");
       return of(new Array<number>);
     }
     let access_token = localStorage.getItem('acces_token');
@@ -47,7 +46,6 @@ export class TeamPokemonService {
         'Authorization': 'Bearer ' + access_token
       })
     };
-    console.log(this.teamId);
 
     return this.http.put(`${this.apiUrl}/trainers/me/team`, this.teamId, httpOptions);
   }

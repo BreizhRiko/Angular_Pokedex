@@ -56,7 +56,6 @@ export class PokemonListComponent implements OnInit{
    */
   search(q: string): void {
     this.query =q;
-    console.log(this.query);
     (<HTMLElement>this.liste?.nativeElement).firstElementChild?.scrollIntoView();
     this.getPokemons();
   }
